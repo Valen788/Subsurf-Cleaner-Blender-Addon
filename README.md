@@ -2,42 +2,53 @@
 
 ![gifSubsurdCleanerNew](https://github.com/user-attachments/assets/29882a63-d945-4e9b-a6ac-66a1d7b9ce84)
 
-Subsurf Cleaner — это аддон для Blender, который сохраняет оригинальную сетку, применяет модификатор Subdivision Surface, а затем удаляет всё добавленное деление и восстанавливает только исходную топологию — но уже со сглаженными позициями вершин. Всё это происходит нажатием одной кнопки. тестировался на блендер 4.4, но gpt уверяет что будет работать с версии 3.0 и выше
+Subsurf Cleaner:
+A simple Blender addon that smooths your mesh using the Subdivision Surface modifier without adding new polygons.
 
-Установка стандартная для аддонов блендер, просто установите SubsurfCleaner.py как аддон
+How it works
+The addon creates a temporary copy of the object.
 
-UPD: Обновление версия 2.0 теперь может:
+Applies a Subdivision Surface modifier (level 1) to the copy.
 
-1)Сохранение и восстановление всех UV-слоёв
+Obtains the smoothed vertex coordinates.
 
-2)Сохранение и восстановление материалов (индексы полигонов остаются прежними, если ваша модель имеет много разных материалов, они будут примененны в тех же местах, так же как были до применение Subdivision Surface)
+Transfers these coordinates back to the original mesh.
 
-3)Сохранение и восстановление швов (Seams)
+What stays unchanged
+Original mesh topology
 
-4)Сохранение и восстановление острых граней (Mark Sharp)
+UV maps
 
-Остальная логика (применение Subsurf, восстановление топологии, интерфейс) осталась без изменений.
+Materials
 
-Не сохраняет группы вершин(хоть и оставляет группы но они пустые)
+Vertex groups
 
-Shade Smooth(просто сбрасывает, не проблема, показывает что аддон действительно сработал визуально, просто заного примените Shade Smooth)
+Modifiers
 
-📌 Особенности:
-Работает нажатием одной кнопки
+Only the vertex positions are changed.
 
-Применяет модификатор Subdivision Surface автоматически
+Modifier compatibility
+Works with any modifiers, including Multiresolution.
 
-Удаляет добавленные вершины и рёбра
+Unlike previous versions, subdivision levels are no longer reset.
 
-Восстанавливает исходную топологию
+When changing the base mesh with Multiresolution, subdivision levels adjust to new coordinates — this is standard Blender behavior, not an addon issue.
 
-Сохраняет сглаженную форму без изменения структуры сетки
+Visual reference
+The smoothing effect is similar to the “On Cage” mode in the Subdivision Surface modifier.
 
-Удобен для ретопологии, чтобы добиться мягкого и чистого сглаживания при сохранении начальной модели
+You get a smooth shape close to how the mesh looks with “On Cage” enabled.
 
-🧠 Создан с помощью ChatGPT
-Разработан при помощи искусственного интеллекта ChatGPT от OpenAI.
+Important note
+The GIF above refers to the previous version.
+
+In the new version, the Subdivision Surface modifier is not required on the original object.
+
+Smoothing happens through a separate copy, isolating changes and preserving the original mesh structure.
+
+🧠 Created with ChatGPT
+Developed using artificial intelligence ChatGPT by OpenAI.
 
 📜
-Публикуется под лицензией Creative Commons Zero v1.0 Universal (CC0 1.0) —
-вы можете использовать, модифицировать и распространять аддон свободно, без указания авторства и без ограничений, в том числе в коммерческих целях.
+Published under the Creative Commons Zero v1.0 Universal (CC0 1.0) license —
+you are free to use, modify, and distribute the addon without attribution or restrictions, including for commercial purposes.
